@@ -28,7 +28,7 @@ class MonteCarloCoin:
             self.n_shots = [self.n_shots]
 
     def area_of_circle(self, area_square, coin_hits, total_hits):
-        area_circle = (coin_hits / total_hits) * area_square 
+        area_circle = (coin_hits / int(total_hits)) * area_square 
         return area_circle
 
     def random_shot(self):
@@ -38,10 +38,10 @@ class MonteCarloCoin:
 
     def run(self):
         simulated_radius = np.zeros(len(self.n_shots))
-        n_coin_shots = 0
         start_simulate = time.time()
         for idx, j in enumerate(self.n_shots):
             start = time.time()
+            n_coin_shots = 0
             for i in range(int(j)):
                 a, b = self.random_shot()
                 if ((a ** 2) + (b ** 2)) <= (self.radius_circle ** 2):
@@ -66,9 +66,9 @@ if __name__ == "__main__":
     import seaborn as sns
     sns.set()
 
-    radius_circle = 2.5
+    radius_circle = 1.75
     side_square = 5.
-    n_shots = [10, 1e2, 1e3, 1e5, 1e6]
+    n_shots = [1e1, 1e2, 1e3, 1e4, 1e5, 1e6]
     coin = MonteCarloCoin(radius_circle, side_square, n_shots, verbose = True)
 
     radii = coin.run()
