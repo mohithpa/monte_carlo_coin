@@ -1,5 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
+import time
+
+st = time.time()
+sns.set()
 
 def area_of_circle(asquare, coin_hits, total_hits):
     acircle = (coin_hits/total_hits)*asquare 
@@ -15,7 +20,7 @@ def random_shot(side):
 Ncoin = 0
 N = 0
 
-radius_of_circle = 1.75
+radius_of_circle = 2.5
 #def circle_checker(number1, number2,radius):
 #    global N
 #    global Ncoin
@@ -39,11 +44,17 @@ for j in shots:
     areaaa = area_of_circle(square_side**2,Ncoin, N)
     simulated_element = (areaaa/np.pi)**0.5
     simulated_radius.append(simulated_element)
+    N = 0
+    Ncoin = 0
 
 print(simulated_radius)
 plt.plot(shots,simulated_radius)
 plt.xscale("log")
 plt.xlabel("No of shots")
 plt.ylabel("radius")
-plt.title("Number of shots vs radius")
-plt.savefig("coin_size.png")
+plt.scatter(shots,simulated_radius, color = "red")
+plt.title("Number of shots vs radius(2.5 units)")
+plt.savefig("coin_size_2.5.png")
+et = time.time()
+elapsed_time = et - st
+print('Execution time:', elapsed_time, 'seconds')
